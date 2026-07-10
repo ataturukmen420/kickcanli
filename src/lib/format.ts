@@ -26,7 +26,6 @@ export function timeAgoTr(iso: string): string {
   const week = Math.floor(day / 7);
   const month = Math.floor(day / 30);
   const year = Math.floor(day / 365);
-
   if (sec < 60) return "az önce";
   if (min < 60) return `${min} dakika önce`;
   if (hour < 24) return `${hour} saat önce`;
@@ -49,6 +48,13 @@ export function formatDuration(totalSeconds: number): string {
 
 export function formatDurationMs(ms: number): string {
   return formatDuration(Math.floor(ms / 1000));
+}
+
+// Kick tarihi → ISO 8601. Kick VOD'ları "YYYY-MM-DD HH:MM:SS" (UTC, naive),
+// klipler zaten ISO döner — schema.org ve sitemap lastModified için.
+export function kickDateToIso(s: string): string {
+  if (!s) return s;
+  return s.includes("T") ? s : `${s.replace(" ", "T")}Z`;
 }
 
 // Saniye → ISO 8601 süre (ör. "PT1H39M22S") — schema.org VideoObject için.

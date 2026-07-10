@@ -1,7 +1,11 @@
 const FAQ: { q: string; a: string }[] = [
   {
     q: "ATA TÜRÜKMEN kimdir?",
-    a: "ATA TÜRÜKMEN, Tayland'da yaşayan ve Kick platformunda IRL (gerçek hayat) yayınlar yapan Türk içerik üreticisi ve canlı yayıncıdır. @ataturukmen kanalında neredeyse her gün yayın açar; gezilerini, günlük hayatını ve dumanlı sohbetlerini takipçileriyle paylaşır.",
+    a: "ATA TÜRÜKMEN (ataturukmen), Tayland'ın Pattaya şehrinde yaşayan ve Kick platformunda IRL (gerçek hayat) yayınlar yapan Türk içerik üreticisi, canlı yayıncı ve girişimcidir. @ataturukmen kanalında neredeyse her gün yayın açar; gezilerini, günlük hayatını ve dumanlı sohbetlerini takipçileriyle paylaşır.",
+  },
+  {
+    q: "ATA TÜRÜKMEN nerede yaşıyor?",
+    a: "ATA TÜRÜKMEN, Tayland'ın Pattaya şehrinde yaşıyor. IRL yayınlarının büyük bölümünü Pattaya sokaklarından, çiftliğinden ve Tayland gezilerinden yapıyor.",
   },
   {
     q: "ATA TÜRÜKMEN hangi platformda yayın yapıyor?",
@@ -66,17 +70,22 @@ export function AboutFaq() {
           </h2>
         </div>
       </div>
-
       <p className="mb-8 max-w-3xl text-sm leading-relaxed text-(--text-2)">
-        <strong className="text-(--text-1)">ATA TÜRÜKMEN</strong>, Tayland&apos;dan IRL yayınlar yapan
-        Türk <strong className="text-(--text-1)">Kick yayıncısıdır</strong>. Kick platformundaki{" "}
+        <strong className="text-(--text-1)">ATA TÜRÜKMEN</strong> (ataturukmen), Tayland&apos;ın
+        Pattaya şehrinden IRL yayınlar yapan Türk{" "}
+        <strong className="text-(--text-1)">Kick yayıncısı</strong>, içerik üreticisi ve
+        girişimcidir. Kick platformundaki{" "}
         <span className="text-(--kick)">@ataturukmen</span> kanalında günlük hayatını, gezilerini ve
         dumanlı sohbetlerini canlı paylaşır. Bu sayfada ATA TÜRÜKMEN&apos;in{" "}
         <strong className="text-(--text-1)">canlı yayınını</strong> izleyebilir, en iyi{" "}
         <strong className="text-(--text-1)">kliplerine</strong> ve geçmiş{" "}
         <strong className="text-(--text-1)">yayın arşivine</strong> tek yerden ulaşabilirsin.
+        Güncel takipçi ve yayın verileri için{" "}
+        <a href="/stats" className="text-(--kick) underline-offset-4 hover:underline">
+          ATA TÜRÜKMEN Kick istatistikleri
+        </a>{" "}
+        sayfasına göz at.
       </p>
-
       <div className="flex flex-col gap-3" role="list">
         {FAQ.map((item) => (
           <details
