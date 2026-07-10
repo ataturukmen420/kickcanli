@@ -12,10 +12,11 @@ jobs:
           node-version: '24'
       - run: npm ci
       - run: npm run build
-      - uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: team_fPzAhgnVAyKhLaKX88U6ldR2
-          vercel-project-id: prj_GKb321MuGJeFlCtAgMHdZrYbIzNl
-          vercel-args: '--prod'
-          working-directory: ./
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+      - name: Deploy to Vercel (prod)
+        run: vercel deploy --prod --yes --token=$VERCEL_TOKEN
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_fPzAhgnVAyKhLaKX88U6ldR2
+          VERCEL_PROJECT_ID: prj_GKb321MuGJeFlCtAgMHdZrYbIzNl
