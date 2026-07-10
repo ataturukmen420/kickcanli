@@ -18,7 +18,12 @@ const socials = [
     path: "M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.25 3.5-6.25 3.5z",
   },
   {
-    href: "https://instagram.com/ataturukmen",
+    href: "https://x.com/Ataturukmenx",
+    label: "X'te takip et",
+    path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z",
+  },
+  {
+    href: "https://instagram.com/ataturukmenn",
     label: "Instagram'da takip et",
     path: "M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z",
   },
@@ -76,6 +81,7 @@ export function Hero() {
     const MAX = 7;
     el.style.transform = `rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg)`;
   };
+
   const resetTilt = () => {
     if (cardRef.current) cardRef.current.style.transform = "rotateX(0deg) rotateY(0deg)";
   };
@@ -91,6 +97,9 @@ export function Hero() {
         <img
           src="/generated/hero.webp"
           alt=""
+          width={1920}
+          height={1280}
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover"
           style={{ filter: "brightness(0.6) saturate(1.15) contrast(1.05)" }}
         />
@@ -105,7 +114,6 @@ export function Hero() {
           }}
         />
       </div>
-
       {/* Yüzen yeşil ışık küreleri */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
@@ -127,11 +135,9 @@ export function Hero() {
           }}
         />
       </div>
-
       <div className="absolute inset-0 z-0">
         <HeroCanvas />
       </div>
-
       {/* İçerik kartı */}
       <div
         className="relative z-10 w-full max-w-3xl px-4 py-20 sm:px-6"
@@ -170,8 +176,10 @@ export function Hero() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={data.profilePic ?? "/icon.png"}
-                    alt={`${KICK_SLUG} profil fotoğrafı`}
-                    loading="lazy"
+                    alt="ATA TÜRÜKMEN profil fotoğrafı"
+                    width={144}
+                    height={144}
+                    fetchPriority="high"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -186,7 +194,6 @@ export function Hero() {
                 </span>
               </div>
             </div>
-
             <div className="flex flex-1 flex-col gap-5 text-center sm:text-left">
               <div>
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-start">
@@ -194,7 +201,7 @@ export function Hero() {
                     className="text-4xl font-black tracking-tight text-(--text-1) sm:text-5xl"
                     style={{ textShadow: "0 0 40px rgba(83,252,24,0.25)" }}
                   >
-                    {KICK_SLUG}
+                    ATA TÜRÜKMEN
                   </h1>
                   <StatusBadge live={data.live.isLive} viewers={data.live.viewers} />
                 </div>
@@ -206,19 +213,16 @@ export function Hero() {
                   <span>IRL Yayıncı</span>
                 </p>
               </div>
-
               {data.bio && (
                 <p className="text-sm leading-relaxed text-(--text-2) max-w-md whitespace-pre-line">
                   {data.bio}
                 </p>
               )}
-
               <div className="flex items-stretch rounded-2xl border border-(--border) bg-(--surface-1)/50 px-2 py-3">
                 <StatItem first value={followers} label="Takipçi" />
                 <StatItem value={String(data.vods.length)} label="Yayın" />
                 <StatItem value={String(data.clips.length)} label="Klip" />
               </div>
-
               <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
                 {socials.map((s) => (
                   <a
@@ -249,7 +253,6 @@ export function Hero() {
             </div>
           </div>
         </div>
-
         <div className="mt-10 flex flex-col items-center gap-2 opacity-40">
           <span className="text-xs text-(--text-2) uppercase tracking-widest">İçerik</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--kick)" strokeWidth="2" className="float" aria-hidden="true">
