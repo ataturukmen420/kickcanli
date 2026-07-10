@@ -1,15 +1,11 @@
 import { INITIAL_KICK_DATA } from "@/lib/snapshot";
-import { toIsoDuration } from "@/lib/format";
+import { toIsoDuration, kickDateToIso } from "@/lib/format";
+import { SITE_URL } from "@/lib/seo";
 
 // schema.org VideoObject şeması (VOD'lar + klipler) — SEO/rich results için.
 // Deploy anındaki anlık veriden üretilir (orijinal sitedeki yapıyla aynı).
 
-const PERSON_ID = "https://kickcanli.com/#person";
-
-function toIso(s: string): string {
-  if (!s) return s;
-  return s.includes("T") ? s : `${s.replace(" ", "T")}Z`;
-}
+const PERSON_ID = `${SITE_URL}/#person`;
 
 export function VideoSchema() {
   const items = [
@@ -20,6 +16,7 @@ export function VideoSchema() {
       dur: toIsoDuration(Math.floor(v.durationMs / 1000)),
       url: v.url,
       views: v.views,
+      kind: "geçmiş canlı yayını" as const,
     })),
     ...INITIAL_KICK_DATA.clips.map((c) => ({
       name: c.title,
@@ -28,6 +25,7 @@ export function VideoSchema() {
       dur: toIsoDuration(c.durationSec),
       url: c.url,
       views: c.views,
+      kind: "öne çıkan klibi" as const,
     })),
   ];
 
@@ -36,8 +34,10 @@ export function VideoSchema() {
     "@graph": items.map((v) => ({
       "@type": "VideoObject",
       name: v.name,
+      description: `${v.name} — ATA TÜRÜKMEN'in (ataturukmen) Kick kanalındaki ${v.kind}. Kick üzerinden izlenebilir.`,
+      inLanguage: "tr",
       ...(v.thumb ? { thumbnailUrl: v.thumb } : {}),
-      uploadDate: toIso(v.date),
+      uploadDate: kickDateToIso(v.date),
       duration: v.dur,
       url: v.url,
       interactionStatistic: {
